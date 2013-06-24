@@ -9,42 +9,50 @@ interpreted as described in [RFC 2119](http://tools.ietf.org/html/rfc2119).
 1. Overview
 -----------
 
-This PSR specifies the rules for an interoperable autoloader.
+This PSR specifies the rules for an interoperable PHP autoloader that can co-exist 
+with any other SPL registered autoloaders, which via some means of configuration will
+map valid PHP namespaces to valid "base directories" in the file system.
 
 
 2. Definitions
 --------------
 
-- `class`: The term "class" refers to PHP classes, interfaces, and traits.
+- **class**: The term _class_ refers to PHP classes, interfaces, and traits.
 
-- `fully qualified class name`: The full namespace and class name, with
+- **fully qualified class name**: The full namespace and class name, with
   leading backslash. (This is per the
   [Name Resolution Rules](http://php.net/manual/en/language.namespaces.rules.php)
   from the PHP manual.)
 
-- `namespace`: Given a `fully qualified class name` of `\Foo\Bar\Baz\Qux`, the
-  `namespace` is `\Foo\Bar\Baz\`.
+- **namespace**: Given a _fully qualified class name_ of `\Foo\Bar\Baz\Qux`, the
+  _namespace_ is `\Foo\Bar\Baz\`.
 
-- `namespace name`: Given a `fully qualified class name` of
-  `\Foo\Bar\Baz\Qux`, the `namespace names` are `Foo`, `Bar`, and `Baz`.
+- **namespace names**: Given a _fully qualified class name_ of
+  `\Foo\Bar\Baz\Qux`, the _namespace names_ are `Foo`, `Bar`, and `Baz`.
 
-- `namespace prefix`: One or more contiguous `namespace names` at the start of
-  the `namespace`. Given a `fully qualified class name` of `\Foo\Bar\Baz\Qux`,
-  the `namespace prefix` may be `\Foo\`, `\Foo\Bar\`, or `\Foo\Bar\Baz\`.
+- **namespace prefix**: One or more contiguous _namespace names_ at the start of
+  the _namespace_. Given a _fully qualified class name_ of `\Foo\Bar\Baz\Qux`,
+  the _namespace prefix_ may be `\Foo\`, `\Foo\Bar\`, or `\Foo\Bar\Baz\`.
 
-- `relative class name`: The parts of the `fully qualified class name` that
-  appear after the `namespace prefix`. Given a `fully qualified class name` of
-  `\Foo\Bar\Baz\Qux` and a `namespace prefix` of `\Foo\Bar\`, the `relative
-  class name` is `Baz\Qux`.
+- **relative class name**: The parts of the _fully qualified class name_ that
+  appear after the _namespace prefix_. Given a _fully qualified class name_ of
+  `\Foo\Bar\Baz\Qux` and a _namespace prefix_ of `\Foo\Bar\`, the _relative
+  class name_ is `Baz\Qux`.
 
-- `base directory`: The absolute directory path in the file system where the
-  files for `relative class names` have their root.
+- **base directory**: The directory path in the file system where the files for
+  _relative class names_ have their root. Given a namespace prefix of 
+  `\Foo\Bar\`, the _base directory_ could be `/path/to/packages/foo-bar/src`.
+
+- **mapped file name**: The path in the file system resulting from the
+  transformation of a _fully qualified class name_. Given a _fully qualified
+  class name_ of `\Foo\Bar\Baz\Qux`, a namespace prefix of `\Foo\Bar\`, and a
+  _base directory_ of `/path/to/packages/foo-bar/src`, the transformation
+  rules in the specification will result in a _mapped file name_ of
+  `/path/to/packages/foo-bar/src/Baz/Qux.php`.
 
 
 3. Specification
 ----------------
-
-- A class file MUST contain only one class definition.
 
 - A fully qualified class name MUST begin with a top-level namespace name,
   which MUST be followed by zero or more sub-namespace names, and MUST end in
@@ -56,7 +64,11 @@ This PSR specifies the rules for an interoperable autoloader.
 
 - The relative class name MUST be mapped to a sub-path by replacing namespace
   separators with directory separators, and the result MUST be suffixed with
-  `.php`.
+  `.php`; the resulting string MUST be appended to the base directory to form
+  the mapped file name.
+
+- If the mapped file name exists in the file system, the registered autoloader
+  MUST include or require it.
 
 - The registered autoloader callback MUST NOT throw exceptions, MUST NOT
   raise errors of any level, and SHOULD NOT return a value.
@@ -150,12 +162,20 @@ class ClassLoader
      * @param string $prefix The namespace prefix.
      * 
      * @param string $base A base directory for class files in the namespace.
+     * 
+     * @param bool $prepend If true, prepend the base directory to the stack
+     * instead of appending it; this causes it to be searched first rather
+     * than last.
      */
-    public function addNamespace($prefix, $base)
+    public function addNamespace($prefix, $base, $prepend = false)
     {
         $prefix = trim($prefix, '\\');
         $base = rtrim($base, DIRECTORY_SEPARATOR);
-        $this->prefixes[$prefix][] = $base;
+        if ($prepend) {
+            array_unshift($this->prefixes[$prefix], $base);
+        } else {
+            array_push($this->prefixes[$prefix], $base);
+        }
     }
 
     /**
@@ -194,10 +214,11 @@ class ClassLoader
                 // relative file name
                 $file = $base . $relative . '.php';
                 
-                // can we read the file from the filesystem?
+                // can we read the file from the file system?
                 if (is_readable($file)) {
                     // yes, we're done
                     include $file;
+                    return;
                 }
             }
         }
