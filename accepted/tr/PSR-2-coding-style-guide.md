@@ -32,12 +32,12 @@ interpreted as described in [RFC 2119][].
 - Satır uzunluğu üzerine zorlayıcı bir sınır yoktur. ama zorunlu olmamakla birlikte 
 120 karakter olması gerekir. satırlar 80 karakter veya daha az olabilir.
 
-- `namespace` ve `use` tanımlamalarının her birisi yeni bir satırda yapılmalıdır.
+- `namespace` ve `use` ifadelerinin her birisi yeni bir satırda yapılmalıdır.
 
-- Sınıf tanımlamalamarında açılan parantez bir sonraki satırda olmalıdır. Kapanan 
+- Sınıf ifadelerinde açılan parantez bir sonraki satırda olmalıdır. Kapanan 
 parantezde gövdenin bitiminden sonraki satırda olmalıdır. 
 
-- Methodların açılna parantezleri tanımlamalardan sonraki satırda olmalıdır ve 
+- Methodların açılan parantezleri tanımlamalardan sonraki satırda olmalıdır ve 
 kapanan parantezleri de gövdenin bitiminden sonraki satırda olmalıdır.
 
 - (Visibility)[http://www.php.net/manual/tr/language.oop5.visibility.php] her 
@@ -85,7 +85,6 @@ class Foo extends Bar implements FooInterface
         // method body
     }
 }
-?>
 ```
 
 2. Genel
@@ -131,29 +130,28 @@ Satır başına birden fazla ifade olmamalıdır.
 > _alignment._
 
 
-### 2.5. Keywords and True/False/Null
+### 2.5. Anahtar Sözcükler and True/False/Null
 
-PHP [keywords][] küçük karakterli kullanılmalıdır.
+PHP [anahtar sözcükleri][] küçük karakterli kullanılmalıdır.
 
 The PHP sabitleri olan `true`, `false`, ve `null` küçük karakterli kullanılmalıdır.
 
-[keywords]: http://php.net/manual/en/reserved.keywords.php
+[anahtar sözcükleri]: http://php.net/manual/en/reserved.keywords.php
 
 
 
-3. Namespace ve Use Tanımlamaları
----------------------------------
+3. Namespace ve Use İfadeleri
+-----------------------------
 
-When present, there MUST be one blank line after the `namespace` declaration.
+`namespace` ifadesinden sonra bir boşluk olmalıdır.
 
-When present, all `use` declarations MUST go after the `namespace`
-declaration.
+`use` ifadeleri `namespace` ifadelerinden sonra gelmelidir. 
 
-There MUST be one `use` keyword per declaration.
+Her bir tanımlama için bir `use` ifadesi kullanılmalıdır.
 
-There MUST be one blank line after the `use` block.
+`use` bloklarından sonra bir boş satır olmalıdır.
 
-For example:
+Örneğin:
 
 ```php
 <?php
@@ -164,22 +162,22 @@ use BarClass as Bar;
 use OtherVendor\OtherPackage\BazClass;
 
 // ... additional PHP code ...
-?>
 ```
 
 
 4. Sınıflar, Özellikler, ve Methodlar
 -------------------------------------
 
-The term "class" refers to all classes, interfaces, and traits.
+"class" terimi bütün sınıflardan, arayüzlerden(interfaces) ve trait'lerden 
+bahsetmektedir.
 
 ### 4.1. Extends ve Implements
 
-The `extends` and `implements` keywords MUST be declared on the same line as
-the class name.
+`extends` ve `implements` anahtar sözcükleri  sınıf adı ile aynı satırda 
+tanımlanmalıdır. 
 
-The opening brace for the class MUST go on its own line; the closing brace
-for the class MUST go on the next line after the body.
+Sınıf için açılış parantezi kendi satırında olmalıdır; ve kapanış parantezi 
+gövdenin bitişinden sonraki satırda olmalıdır.
 
 ```php
 <?php
@@ -193,12 +191,11 @@ class ClassName extends ParentClass implements \ArrayAccess, \Countable
 {
     // constants, properties, methods
 }
-?>
 ```
 
-Lists of `implements` MAY be split across multiple lines, where each
+_Lists of `implements` MAY be split across multiple lines, where each
 subsequent line is indented once. When doing so, the first item in the list
-MUST be on the next line, and there MUST be only one interface per line.
+MUST be on the next line, and there MUST be only one interface per line._
 
 ```php
 <?php
@@ -215,21 +212,20 @@ class ClassName extends ParentClass implements
 {
     // constants, properties, methods
 }
-?>
 ```
 
 ### 4.2. Özellikler
 
-Visibility MUST be declared on all properties.
+Visibility(Görünürlük) her bir özellik için tanımlanmalıdır.
 
-The `var` keyword MUST NOT be used to declare a property.
+`var` anahtar sözcüğü özelliği tanımlamak için kullanılmamalıdır.
 
-There MUST NOT be more than one property declared per statement.
+Her bir statement'da bir özellikden fazla özellik tanımlanmamalıdır. 
 
-Property names SHOULD NOT be prefixed with a single underscore to indicate
-protected or private visibility.
+Özellik isimleri protected veya private görünürlüklerini göstermek için bir alt 
+çizgi ile başlamamalıdır.
 
-A property declaration looks like the following.
+Bir özellik tanımı aşağıdaki gibi görünür.
 
 ```php
 <?php
@@ -239,23 +235,22 @@ class ClassName
 {
     public $foo = null;
 }
-?>
 ```
 
 ### 4.3. Metodlar
 
-Visibility MUST be declared on all methods.
+Her method için görünürlük tanımlanmalıdır.
 
-Method names SHOULD NOT be prefixed with a single underscore to indicate
-protected or private visibility.
+Method isimlerinin görünürlüklerini göstermek için method isimlerine önek 
+olarak altçizgi kullanılmamalıdır.
 
-Method names MUST NOT be declared with a space after the method name. The
-opening brace MUST go on its own line, and the closing brace MUST go on the
-next line following the body. There MUST NOT be a space after the opening
-parenthesis, and there MUST NOT be a space before the closing parenthesis.
+_Method names MUST NOT be declared with a space after the method name._ 
+Açılış parantezi kendi satırında olmalı ve kapanma parantezi gövdeyinin bitişinden 
+sonraki satırda olmalıdır. Açılış parantezinden sonra boşluk karakteri olmamalıdır
+ve kapanma parantezinden önce boşluk karakteri olmamalıdır.
 
-A method declaration looks like the following. Note the placement of
-parentheses, commas, spaces, and braces:
+Bi metod tanımlaması aşağıdaki gibidir. Parantezlerin, virgüllerin, boşlukların ve
+metod parantezlerinin yerlerini not ediniz:
 
 ```php
 <?php
@@ -268,16 +263,14 @@ class ClassName
         // method body
     }
 }
-?>
 ```    
 
 ### 4.4. Method Parametreleri
 
-In the argument list, there MUST NOT be a space before each comma, and there
-MUST be one space after each comma.
+Parametre listesinde, her bir virgülden önce bir boşluk karakteri olmamalıdır, ve
+virgülden sonra bir boşluk karakteri olmalıdır. 
 
-Method arguments with default values MUST go at the end of the argument
-list.
+Varsayılan değerli metod parametreleri parametre listesinin sonunda olmalıdır.
 
 ```php
 <?php
@@ -290,16 +283,14 @@ class ClassName
         // method body
     }
 }
-?>
 ```
 
-Argument lists MAY be split across multiple lines, where each subsequent line
-is indented once. When doing so, the first item in the list MUST be on the
-next line, and there MUST be only one argument per line.
+Parametre listesi bir kaç satıra bölünebilir, ve her bir satırın başında girintili 
+olmalıdır. Bunu yaparken birinci madde bir sonraki satırda olmalıdır ve her parametre 
+bir satırda olmalıdır.
 
-When the argument list is split across multiple lines, the closing parenthesis
-and opening brace MUST be placed together on their own line with one space
-between them.
+Parametreler birden fazla satıra bölündüğünde metodun açılış parantezi parametrelerin 
+kapanış parantezi ile aynı satırda olmalıdır ve aralarında bir boşluk karakteri olmalıdır.
 
 ```php
 <?php
@@ -315,16 +306,13 @@ class ClassName
         // method body
     }
 }
-?>
 ```
 
 ### 4.5. `abstract`, `final`, ve `static`
 
-When present, the `abstract` and `final` declarations MUST precede the
-visibility declaration.
+`abstract` ve `final` ifadeleri görünürlük ifadelerinden önce gelmelidir. 
 
-When present, the `static` declaration MUST come after the visibility
-declaration.
+`static` ifadesi görünürlük tanımlarından sonra gelmelidir.
 
 ```php
 <?php
@@ -341,7 +329,6 @@ abstract class ClassName
         // method body
     }
 }
-?>
 ```
 
 ### 4.6. Method ve Fonksiyonları Çağırmak
@@ -357,7 +344,6 @@ each comma, and there MUST be one space after each comma.
 bar();
 $foo->bar($arg1);
 Foo::bar($arg2, $arg3);
-?>
 ```
 
 Argument lists MAY be split across multiple lines, where each subsequent line
@@ -371,7 +357,6 @@ $foo->bar(
     $longerArgument,
     $muchLongerArgument
 );
-?>
 ```
 
 5. Kontrol Yapıları
@@ -407,7 +392,6 @@ if ($expr1) {
 } else {
     // else body;
 }
-?>
 ```
 
 The keyword `elseif` SHOULD be used instead of `else if` so that all control
@@ -440,7 +424,6 @@ switch ($expr) {
         echo 'Default case';
         break;
 }
-?>
 ```
 
 
@@ -454,7 +437,6 @@ parentheses, spaces, and braces.
 while ($expr) {
     // structure body
 }
-?>
 ```
 
 Similarly, a `do while` statement looks like the following. Note the placement
@@ -465,7 +447,6 @@ of parentheses, spaces, and braces.
 do {
     // structure body;
 } while ($expr);
-?>
 ```
 
 ### 5.4. `for`
@@ -478,7 +459,6 @@ spaces, and braces.
 for ($i = 0; $i < 10; $i++) {
     // for body
 }
-?>
 ```
 
 ### 5.5. `foreach`
@@ -491,7 +471,6 @@ parentheses, spaces, and braces.
 foreach ($iterable as $key => $value) {
     // foreach body
 }
-?>
 ```
 
 ### 5.6. `try`, `catch`
@@ -508,7 +487,6 @@ try {
 } catch (OtherExceptionType $e) {
     // catch body
 }
-?>
 ```
 
 6. Closures
@@ -542,7 +520,6 @@ $closureWithArgs = function ($arg1, $arg2) {
 $closureWithArgsAndVars = function ($arg1, $arg2) use ($var1, $var2) {
     // body
 };
-?>
 ```
 
 Argument lists and variable lists MAY be split across multiple lines, where
@@ -602,7 +579,6 @@ $shortArgs_longVars = function ($arg) use (
 ) {
    // body
 };
-?>
 ```
 
 Note that the formatting rules also apply when the closure is used directly
@@ -617,7 +593,6 @@ $foo->bar(
     },
     $arg3
 );
-?>
 ```
 
 
