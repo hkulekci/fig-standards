@@ -154,8 +154,8 @@ class Vendor_Model_Foo
 4. Sınıf Sabitleri, Özellikleri, ve Metodları
 ---------------------------------------------
 
-"Sınıf" terimi tüm sınıflardan(classes), arayüzlerden(interface) ve traits'lerden 
-bahsetmektedir
+"Sınıf" terimi tüm sınıflardan(classes), arayüzlerden(interface) ve 
+(traits)[http://php.net/manual/en/language.oop5.traits.php]'lerden bahsetmektedir
 
 ### 4.1. Sabitler(Constant)
 

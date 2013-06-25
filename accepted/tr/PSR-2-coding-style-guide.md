@@ -22,41 +22,42 @@ interpreted as described in [RFC 2119][].
 [PSR-1]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
 
 
-1. Overview
------------
+1. Genel Bakış
+--------------
 
-- Code MUST follow [PSR-1][].
+- Kod [PSR-1][] standartlerını takip etmelidir.
 
-- Code MUST use 4 spaces for indenting, not tabs.
+- Kod girintiler için 4 boşluk kullanmalıdır. Tab karakterini değil.
 
-- There MUST NOT be a hard limit on line length; the soft limit MUST be 120
-  characters; lines SHOULD be 80 characters or less.
+- Satır uzunluğu üzerine zorlayıcı bir sınır yoktur. ama zorunlu olmamakla birlikte 
+120 karakter olması gerekir. satırlar 80 karakter veya daha az olabilir.
 
-- There MUST be one blank line after the `namespace` declaration, and there
-  MUST be one blank line after the block of `use` declarations.
+- `namespace` ve `use` tanımlamalarının her birisi yeni bir satırda yapılmalıdır.
 
-- Opening braces for classes MUST go on the next line, and closing braces MUST
-  go on the next line after the body.
+- Sınıf tanımlamalamarında açılan parantez bir sonraki satırda olmalıdır. Kapanan 
+parantezde gövdenin bitiminden sonraki satırda olmalıdır. 
 
-- Opening braces for methods MUST go on the next line, and closing braces MUST
-  go on the next line after the body.
+- Methodların açılna parantezleri tanımlamalardan sonraki satırda olmalıdır ve 
+kapanan parantezleri de gövdenin bitiminden sonraki satırda olmalıdır.
 
-- Visibility MUST be declared on all properties and methods; `abstract` and
-  `final` MUST be declared before the visibility; `static` MUST be declared
-  after the visibility.
-  
-- Control structure keywords MUST have one space after them; method and
-  function calls MUST NOT.
+- (Visibility)[http://www.php.net/manual/tr/language.oop5.visibility.php] her 
+özellik ve method'da tanımlanmalıdır; `abstract` ve `final` görünürlülükten 
+önce tanımlanmalıdır; `static` visibility'den sonra tanımlanmalıdır.
 
-- Opening braces for control structures MUST go on the same line, and closing
-  braces MUST go on the next line after the body.
+- (Kontrol yapısı)[http://php.net/manual/en/language.control-structures.php] 
+kelimelerinden sonra bir karakter boşluk yazılmalıdır; method ve fonksiyon 
+çağırmalarında yapılmamalıdır. 
 
-- Opening parentheses for control structures MUST NOT have a space after them,
-  and closing parentheses for control structures MUST NOT have a space before.
+- Kontrol yapılarında açılan gövde parantezi aynı satırda olmalıdır. Kapanan 
+gövde parantezi gövdenin bitiminden sonraki satırda olmalıdır. 
 
-### 1.1. Example
+- Kontrol parametrelerindeki kontrol parantezinden sonra boşluk olmamalıdır, 
+ve kapanma parantezinden önce de boşluk olmamalıdır.
 
-This example encompasses some of the rules below as a quick overview:
+
+### 1.1. Örnek
+
+BU örnek yukarıdaki bazı kuralları kapsayan bir örnektir: 
 
 ```php
 <?php
@@ -87,58 +88,60 @@ class Foo extends Bar implements FooInterface
 ?>
 ```
 
-2. General
-----------
+2. Genel
+--------
 
-### 2.1 Basic Coding Standard
+### 2.1 Basit Kodlama Standartları
 
-Code MUST follow all rules outlined in [PSR-1][].
+Kodlama [PSR-1][] standartlarına uymalıdır.
 
-### 2.2 Files
+### 2.2 Dosyalar
 
-All PHP files MUST use the Unix LF (linefeed) line ending.
+Tüm PHP dosyaları Unix LF (linefeed) dosya sonunu kullanmalıdır.
 
-All PHP files MUST end with a single blank line.
+Tüm dosyalar boş bir satır ile bitmelidir. 
 
-The closing `?>` tag MUST be omitted from files containing only PHP.
+`?>` kapatma etiketi sadece php içeren dosyalar için ihmal edilmedir.
 
-### 2.3. Lines
+### 2.3. Satırlar
 
-There MUST NOT be a hard limit on line length.
+Satır uzunluğu konusunda katı bir sınırlama yoktur.
 
-The soft limit on line length MUST be 120 characters; automated style checkers
-MUST warn but MUST NOT error at the soft limit.
+Satır uzunluğu (soft limit) 120 karakter olmalıdır; otomatik stil kontrol 
+araçları uyarı verecektir ama hata vermeyecektir.
 
-Lines SHOULD NOT be longer than 80 characters; lines longer than that SHOULD
-be split into multiple subsequent lines of no more than 80 characters each.
+Satılar 80 karakterden daha uzun olmayabilir; bundan uzun olduğu zamanlarda 
+her biri 80 karakterden kısa satırlara ayrılabilir.
 
-There MUST NOT be trailing whitespace at the end of non-blank lines.
+Dosyanın son satırında boşluk karakteri kullanılmamalıdır. Satır boş olmalıdır.
 
-Blank lines MAY be added to improve readability and to indicate related
-blocks of code.
+Boş satırlar kodun okunabilirliğini artırmak ve ilgili kod bloklarını 
+göstermek için eklenebilir.
 
-There MUST NOT be more than one statement per line.
+Satır başına birden fazla ifade olmamalıdır.
 
-### 2.4. Indenting
+### 2.4. Girinti
 
-Code MUST use an indent of 4 spaces, and MUST NOT use tabs for indenting.
+4 boşluklu girinti kullanılmalıdır, ve girinti için tab kullanılmamalıdır. 
 
-> N.b.: Using only spaces, and not mixing spaces with tabs, helps to avoid
-> problems with diffs, patches, history, and annotations. The use of spaces
-> also makes it easy to insert fine-grained sub-indentation for inter-line 
-> alignment.
+> Dikkat et: Sadece boşluk karakteri kullan, ve boşluk karakteri ve tab 
+> karakterini karıştırma, önlemek için diff'lerden, yamalardan, geçmişden 
+> ve açıklamalardan yararlanabilirsin. _The use of spaces_
+> _also makes it easy to insert fine-grained sub-indentation for inter-line_
+> _alignment._
+
 
 ### 2.5. Keywords and True/False/Null
 
-PHP [keywords][] MUST be in lower case.
+PHP [keywords][] küçük karakterli kullanılmalıdır.
 
-The PHP constants `true`, `false`, and `null` MUST be in lower case.
+The PHP sabitleri olan `true`, `false`, ve `null` küçük karakterli kullanılmalıdır.
 
 [keywords]: http://php.net/manual/en/reserved.keywords.php
 
 
 
-3. Namespace and Use Declarations
+3. Namespace ve Use Tanımlamaları
 ---------------------------------
 
 When present, there MUST be one blank line after the `namespace` declaration.
@@ -165,12 +168,12 @@ use OtherVendor\OtherPackage\BazClass;
 ```
 
 
-4. Classes, Properties, and Methods
------------------------------------
+4. Sınıflar, Özellikler, ve Methodlar
+-------------------------------------
 
 The term "class" refers to all classes, interfaces, and traits.
 
-### 4.1. Extends and Implements
+### 4.1. Extends ve Implements
 
 The `extends` and `implements` keywords MUST be declared on the same line as
 the class name.
@@ -215,7 +218,7 @@ class ClassName extends ParentClass implements
 ?>
 ```
 
-### 4.2. Properties
+### 4.2. Özellikler
 
 Visibility MUST be declared on all properties.
 
@@ -239,7 +242,7 @@ class ClassName
 ?>
 ```
 
-### 4.3. Methods
+### 4.3. Metodlar
 
 Visibility MUST be declared on all methods.
 
@@ -268,7 +271,7 @@ class ClassName
 ?>
 ```    
 
-### 4.4. Method Arguments
+### 4.4. Method Parametreleri
 
 In the argument list, there MUST NOT be a space before each comma, and there
 MUST be one space after each comma.
@@ -315,7 +318,7 @@ class ClassName
 ?>
 ```
 
-### 4.5. `abstract`, `final`, and `static`
+### 4.5. `abstract`, `final`, ve `static`
 
 When present, the `abstract` and `final` declarations MUST precede the
 visibility declaration.
@@ -341,7 +344,7 @@ abstract class ClassName
 ?>
 ```
 
-### 4.6. Method and Function Calls
+### 4.6. Method ve Fonksiyonları Çağırmak
 
 When making a method or function call, there MUST NOT be a space between the
 method or function name and the opening parenthesis, there MUST NOT be a space
@@ -371,8 +374,8 @@ $foo->bar(
 ?>
 ```
 
-5. Control Structures
----------------------
+5. Kontrol Yapıları
+-------------------
 
 The general style rules for control structures are as follows:
 
