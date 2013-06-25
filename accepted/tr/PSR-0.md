@@ -58,7 +58,6 @@ function autoload($className)
 
     require $fileName;
 }
-?>
 ```
 
 SplClassLoader Uygulaması

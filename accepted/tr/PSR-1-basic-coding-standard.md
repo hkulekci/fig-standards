@@ -87,7 +87,6 @@ function foo()
 {
     // function body
 }
-?>
 ```
 
 The following example is of a file that contains declarations without side
@@ -108,7 +107,6 @@ if (! function_exists('bar')) {
         // function body
     }
 }
-?>
 ```
 
 
@@ -134,7 +132,6 @@ namespace Vendor\Model;
 class Foo
 {
 }
-?>
 ```
 
 5.2.x ve öncesi için yazılmış kodlarda pseudo-namespacing çevirisini kullanmalıdır.
@@ -148,7 +145,6 @@ Bu yöntemde sınıflar `Vendor_` öneki alırlar.
 class Vendor_Model_Foo
 {
 }
-?>
 ```
 
 4. Sınıf Sabitleri, Özellikleri, ve Metodları
@@ -172,7 +168,6 @@ class Foo
     const VERSION = '1.0';
     const DATE_APPROVED = '2012-06-01';
 }
-?>
 ```
 
 ### 4.2. Özellikler
