@@ -333,11 +333,11 @@ abstract class ClassName
 
 ### 4.6. Method ve Fonksiyonları Çağırmak
 
-When making a method or function call, there MUST NOT be a space between the
-method or function name and the opening parenthesis, there MUST NOT be a space
-after the opening parenthesis, and there MUST NOT be a space before the
-closing parenthesis. In the argument list, there MUST NOT be a space before
-each comma, and there MUST be one space after each comma.
+Bir fonksiyon ya da metod çağrılırken, metod ve fonksiyon ismi ile parametrelerin 
+açılış parantezleri arasında boşluk bulunmamalıdır, parametrelerin açılış parantezinden
+sonra da boşluk bulunmamalıdır, ve parametrelerin kapanış parantezinden önce de bir 
+boşluk karakteri kullanılmamalıdır.Parametre listesinde, her bir virgülden önce 
+boşluk olmamalıdır ve her virgülden sonra bir boşluk karakteri olmalıdır. 
 
 ```php
 <?php
@@ -346,9 +346,9 @@ $foo->bar($arg1);
 Foo::bar($arg2, $arg3);
 ```
 
-Argument lists MAY be split across multiple lines, where each subsequent line
-is indented once. When doing so, the first item in the list MUST be on the
-next line, and there MUST be only one argument per line.
+Parametreler her birinin başında bir girinti olacak şekilde birden fazla satıra 
+bölünebilir. Bunu yaparken, birinci parametre bir sonraki satırda olmalıdır, ve 
+her bir satırda sadece bir parametre olmalıdır.
 
 ```php
 <?php
@@ -362,26 +362,27 @@ $foo->bar(
 5. Kontrol Yapıları
 -------------------
 
-The general style rules for control structures are as follows:
+Kontrol yapıları için genel kurallar aşağıdaki gibidir: 
 
-- There MUST be one space after the control structure keyword
-- There MUST NOT be a space after the opening parenthesis
-- There MUST NOT be a space before the closing parenthesis
-- There MUST be one space between the closing parenthesis and the opening
-  brace
-- The structure body MUST be indented once
-- The closing brace MUST be on the next line after the body
+- Kontrol yapısı anahtar sözcüğünden sonra bir boşluk gelmelidir.
+- Kontrol yapısı açılış parantezinden sonra boşluk bulunmamalıdır.
+- Kontrol yapısı kapanış parantezinden önce boşluk bulunmamalıdır.
+- Kontrol yapısı kapanış parantezi ile kontrol yapısı gövdesinin 
+  açılış parantezi arasında bir boşluk karakteri olmalıdır.
+- Kontrol yapısı gövdesi bir girinti boyutunda içerde olmalıdır. 
+- Kontrol yapısı gövde kapanış parantezi gövdenin bitişinden sonraki 
+  satırda olmalıdır.
 
-The body of each structure MUST be enclosed by braces. This standardizes how
-the structures look, and reduces the likelihood of introducing errors as new
-lines get added to the body.
+Her kontrol yapısının gövdesi parantez içerisinde olmalıdır. _This 
+standardizes how the structures look, and reduces the likelihood of 
+introducing errors as new lines get added to the body._
 
 
 ### 5.1. `if`, `elseif`, `else`
 
-An `if` structure looks like the following. Note the placement of parentheses,
-spaces, and braces; and that `else` and `elseif` are on the same line as the
-closing brace from the earlier body.
+Bir `if` yapısı aşağıdaki gibi görünür. Parantezlerin, boşlukların yerlerini
+not edin; ve `else` ve `elseif` ifadeleri açılış ve önceki ifadenin kapanış 
+parantezleri ile aynı satırdadir.  
 
 ```php
 <?php
@@ -393,10 +394,8 @@ if ($expr1) {
     // else body;
 }
 ```
-
-The keyword `elseif` SHOULD be used instead of `else if` so that all control
-keywords look like single words.
-
+`elseif` anahtar sözcüğü `else if` yerine kullanılabilir, böylece tüm kontrol 
+anahtar sözcükleri tek bir kelime gibi görünür.
 
 ### 5.2. `switch`, `case`
 

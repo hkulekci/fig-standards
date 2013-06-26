@@ -1,14 +1,14 @@
-PHP Framework Birlikte Çalışabilirlik Grubu
-===========================================
+PHP Çatıları Birlikte Çalışabilirlik Grubu
+==========================================
 
 Proje temsilcileri için grubun arkasındaki fikir projerlerimiz arasında ortaklık hakkında konuşmak ve birlikte çalışabilmenin bir yolunu bulmaktır. Bizim temel kitlemiz okuyucumuz, ama PHP topluluğunun geri kalanının bizi izlediğinin farkındayız. Eğer biz ne yapıyoruz benimsemek istiyorsanız bekleriz, ama asıl amaç bu değildir (Sanırım sizi toplamak amacımız değil. Biz bir standart oluşturmak istiyoruz sadece diyor.). 
 
-Bir Standart Öneridinde Bulunmak
+Bir Standart Önerisinde Bulunmak
 --------------------------------
 
 Bir standart önerisinde bulunmak için (PSR):
 
-- Repo'yu fork edin, bir branch oluşturum, PSR dosyanızı `proposed/` dizinine 
+- Repo'yu fork edin, bir branch oluşturun, PSR dosyanızı `proposed/` dizinine 
 atın, oluşturduğunuz branch'ı Github'a gönderin ve `pull request` gönderin; veya
 
 - Github üzerinde tartışmak için bir konu başlatın; veya,
@@ -21,10 +21,10 @@ atın, oluşturduğunuz branch'ı Github'a gönderin ve `pull request` gönderin
 Üyelik İsteği
 -------------
 
-Fikirlerinizi belirtmek için illede illede oy hakkında sahip üye olmanız 
+Fikirlerinizi belirtmek için ille de oy hakkına sahip üye olmanız 
 gerekmiyor. [Mail listesini][] bu iş için kullanabilirsiniz. 
 
-Oy hakkında sahip olmak için, [Mail listesine][] bir mail göndermelisiniz. 
+Oy hakkına sahip olmak için, [Mail listesine][] bir mail göndermelisiniz. 
 
 - Mail'in konusu şöyle olmalı : `Membership Request: {$your_name} ({$project_name})`
 
@@ -37,7 +37,7 @@ Birden fazla üyelik isteğini tek bir konuda sunmayın. Her bir üyelik için a
 sunun.
 
 
-Oy Hakkında Sahip Üyeler
+Oy Hakkına Sahip Üyeler
 ------------------------
 
 1. Nate Abele: Lithium
