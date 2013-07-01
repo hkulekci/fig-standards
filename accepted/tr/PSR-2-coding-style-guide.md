@@ -399,11 +399,11 @@ anahtar sözcükleri tek bir kelime gibi görünür.
 
 ### 5.2. `switch`, `case`
 
-A `switch` structure looks like the following. Note the placement of
-parentheses, spaces, and braces. The `case` statement MUST be indented once
-from `switch`, and the `break` keyword (or other terminating keyword) MUST be
-indented at the same level as the `case` body. There MUST be a comment such as
-`// no break` when fall-through is intentional in a non-empty `case` body.
+Bir `switch` yapısı aşağıdaki gibidir. Parantezlerin, boşlukların yerlerini
+not edin. `case` ifadesi `switch` ifadesinden bir tab karakteri kadar içerde 
+olmalıdır ve `break` anahtar kelimesi (diğer bir durdurma anahtar kelimesi)
+`case` gövdesi ile aynı seviye girintide olmalıdır. Boş olmayan bir `case` 
+gövdesinde `// no break` yorum satırı olmalıdır.
 
 ```php
 <?php
@@ -428,8 +428,8 @@ switch ($expr) {
 
 ### 5.3. `while`, `do while`
 
-A `while` statement looks like the following. Note the placement of
-parentheses, spaces, and braces.
+Bir `while` ifadesi aşağıdaki gibi görünür. Parantezleri ve boşlukları not 
+ediniz.
 
 ```php
 <?php
@@ -438,8 +438,8 @@ while ($expr) {
 }
 ```
 
-Similarly, a `do while` statement looks like the following. Note the placement
-of parentheses, spaces, and braces.
+Aynı şekilde, bir `do while` ifadesi de aşağıdaki gibi görünür. Parantezleri 
+ve boşlukları not ediniz.
 
 ```php
 <?php
@@ -450,8 +450,8 @@ do {
 
 ### 5.4. `for`
 
-A `for` statement looks like the following. Note the placement of parentheses,
-spaces, and braces.
+Bir `for` ifadesi aşağıdaki gibi görünür. Parantezlere ve boşluklara dikkat 
+ediniz.
 
 ```php
 <?php
@@ -461,9 +461,9 @@ for ($i = 0; $i < 10; $i++) {
 ```
 
 ### 5.5. `foreach`
-    
-A `foreach` statement looks like the following. Note the placement of
-parentheses, spaces, and braces.
+
+Bir `foreach` ifadesi aşağıdaki gibi görünür. Parantezlere ve boşluklara dikkat 
+ediniz.
 
 ```php
 <?php
@@ -474,8 +474,8 @@ foreach ($iterable as $key => $value) {
 
 ### 5.6. `try`, `catch`
 
-A `try catch` block looks like the following. Note the placement of
-parentheses, spaces, and braces.
+Bir `try catch` ifadesi aşağıdaki gibi görünür. Parantezlere ve boşluklara dikkat 
+ediniz.
 
 ```php
 <?php
@@ -488,27 +488,25 @@ try {
 }
 ```
 
-6. Closures
+6. "Closures"lar
 -----------
 
-Closures MUST be declared with a space after the `function` keyword, and a
-space before and after the `use` keyword.
+"Closure"lar `function` özel anahtarından bir boşluk sonra belirtilmelidir, ve `use` 
+özel anahtarından önce ve sonra bir boşluk bulunmalıdır. 
 
-The opening brace MUST go on the same line, and the closing brace MUST go on
-the next line following the body.
+"Closure" gövdesi açılış parantezi aynı satırda olmalıdır, ve kapatma parantezi gövdenin
+bitiminden sonraki yeni satırda olmalıdır.
 
-There MUST NOT be a space after the opening parenthesis of the argument list
-or variable list, and there MUST NOT be a space before the closing parenthesis
-of the argument list or variable list.
+Parametre ve değişken listesi açılış parantezinden sonra bir boşluk olmamalıdır ve aynı 
+listenin kapanış parantezinden önce bir boşluk olmamalıdır.
 
-In the argument list and variable list, there MUST NOT be a space before each
-comma, and there MUST be one space after each comma.
+Parametre ve değişken listesinde, her virgülden önce boşluk olmamalıdır ve her virgülden 
+sonra bir boşluk karakteri olmalıdır.
 
-Closure arguments with default values MUST go at the end of the argument
-list.
+Closure'ın varsayılan değeri olan parametreleri parametre listesinin sonunda olmalıdır.
 
-A closure declaration looks like the following. Note the placement of
-parentheses, commas, spaces, and braces:
+Bir closure aşağıdaki gibi tanımlanmalıdır. Parantezlere, virgüllere ve boşluklara 
+dikkat edin.
 
 ```php
 <?php
@@ -520,18 +518,16 @@ $closureWithArgsAndVars = function ($arg1, $arg2) use ($var1, $var2) {
     // body
 };
 ```
+Parametre ve değişken listesi birden fazla satıra bölüne bölünebilir, her bir alt satır 
+bir girinti içerde olur. Bunu yaparken, listedeki ilk eleman bir sonraki satırda olmalıdır,
+ve her satırda bir parametre ya da değişken olmalıdır.
 
-Argument lists and variable lists MAY be split across multiple lines, where
-each subsequent line is indented once. When doing so, the first item in the
-list MUST be on the next line, and there MUST be only one argument or variable
-per line.
+Liste sonlandığı zaman, parametrelerin kapanış parantezi ile closure gövedesinin açılış 
+parantezi aynı satırda ve yeni bir satırda olur. Bu iki parantezin aralarında bir boşluk
+karakteri olur.
 
-When the ending list (whether or arguments or variables) is split across
-multiple lines, the closing parenthesis and opening brace MUST be placed
-together on their own line with one space between them.
-
-The following are examples of closures with and without argument lists and
-variable lists split across multiple lines.
+Bir parametreli, parametresiz, değişkenli ve değişkensiz "closure"ların örnekleri 
+aşağıdaki gibi tanımlanmalıdır. Parantezlere, virgüllere ve boşluklara dikkat edin.
 
 ```php
 <?php
@@ -580,8 +576,8 @@ $shortArgs_longVars = function ($arg) use (
 };
 ```
 
-Note that the formatting rules also apply when the closure is used directly
-in a function or method call as an argument.
+Closure metodunu bir fonskiyona parametre olarak gönderirken de düzen 
+kurallarına dikkat edin.
 
 ```php
 <?php
@@ -595,31 +591,31 @@ $foo->bar(
 ```
 
 
-7. Conclusion
+7. Sonuç
 --------------
 
-There are many elements of style and practice intentionally omitted by this
-guide. These include but are not limited to:
+Bir çok elamanın stili ve uygulaması bu rehberde kasıtlı olarak ihmal 
+edilmiştir. BUnlar arasında ama ancak bunlarla sınırlı olmayanlardan bazıları:
 
-- Declaration of global variables and global constants
+- Global değişkenler ve global sabitlerin tanımlanması
 
-- Declaration of functions
+- Fonksiyonların tanımlanması
 
-- Operators and assignment
+- Operatörler ve atamaları
 
-- Inter-line alignment
+- Inter-line hizalama
 
-- Comments and documentation blocks
+- Yorumlar ve dökümantasyon blokları
 
-- Class name prefixes and suffixes
+- Sınıf isimleri önekleri ve sonekleri
 
-- Best practices
+- En iyi uygulamalar
 
-Future recommendations MAY revise and extend this guide to address those or
-other elements of style and practice.
+Gelecekteki önerilerde bu diğer elemanların stilleri ve uygulamarı revize edilebilir 
+ve genişletilebilir.
 
 
-Appendix A. Survey
+Ek A. Survey
 ------------------
 
 In writing this style guide, the group took a survey of member projects to
