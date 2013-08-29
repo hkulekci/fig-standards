@@ -10,10 +10,9 @@ oluşmaktadır.
 "SHOULD NOT", "RECOMMENDED", "MAY", ve "OPTIONAL" kelimeleri 
 [RFC 2119][] adresinde açıklandığı gibi yorumlanmıştır.
 
-
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in [RFC 2119][].
+Çeviri:
+Bu belgedeki *ZORUNLU*, *ÖNERİ* ve *SEÇİMLİK* imleri RFC 2119'da açıklandığı 
+gibi yorumlanır. [Bu konudaki çeviri notu](http://belgeler.gen.tr/rfc/rfc2119.html)
 
 [RFC 2119]: http://www.ietf.org/rfc/rfc2119.txt
 [PSR-0]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md
@@ -28,7 +27,7 @@ interpreted as described in [RFC 2119][].
 
 - Dosyalar ya sembolleri tanımlamalıdır (sınıfları, fonksiyonları, sabitleri 
 declare etmeli) ya da çıktı vermelidir. (çıktı vermeli, .ini ayar dosyasını 
-değiştirmeli) İkisini birden yapmamalı. 
+değiştirmeli), ikisini birden yapmaması önerilir. 
 
 - Namespace ve sınıflar [PSR-0][]'ı takip etmeli.
 
@@ -51,24 +50,22 @@ etiket versiyonlarını kullanmamalı.
 
 PHP kodu `UTF-8 without BOM` formatında olmalıdır.
 
-### 2.3. Etkileri
+### 2.3. Yan Etkileri
 
-Bir dosya bir sembolü (sınıflar, fonksiyonlar, sabitler, ..vs.) tanımlamalıdır 
-ve diğer hiçbir etkisi olmaz, ya da bir mantık yürütür. İkisini birden yapması 
-tavsiye edilmez.
+Bir dosya bir yeni sembolü (sınıflar, fonksiyonlar, sabitler, ..vs.) tanımlanması
+ve diğer hiçbir yanetkisinin olmaması önerilir, ya da bir mantık yürütebilir. 
+İkisini birden yapması tavsiye edilmez.
 
--------------------------------------------------------------------------------
-The phrase "side effects" means execution of logic not directly related to
-declaring classes, functions, constants, etc., *merely from including the
-file*.
+"Yan Etki(Side Effect)"den kasıt sınıf, fonksiyon, sabit, ...vs tanımlamaları 
+ile direk bağlantısı olmayan mantık çalıştırmalarıdır. *sadece dosyadan include 
+edilir*.
 
-"Side effects" include but are not limited to: generating output, explicit
-use of `require` or `include`, connecting to external services, modifying ini
-settings, emitting errors or exceptions, modifying global or static variables,
-reading from or writing to a file, and so on.
+"Yan Etki(Side Effect)", çıktı üretme, açıkça `require` veya `include` kullanımı, 
+dış servislere bağlanma, ini ayar dosyasını değiştirme, hata veya istisnaları 
+ifade etme, global ya da statik değişkenleri değiştirme, dosyadan okuma ya da 
+yazma ve dahasını içerir ancak bunlarla sınırlı değildir.
 
--------------------------------------------------------------------------------
-Aşağıdaki örnek etkileri ve tanımlamaları aynı dosyada kullanan bir dosyadır;
+Aşağıdaki örnek yan etkileri ve tanımlamaları aynı dosyada kullanan bir dosyadır;
 i.e, önlemek için bir örnek:
 
 ```php
@@ -88,23 +85,21 @@ function foo()
     // function body
 }
 ```
-
-The following example is of a file that contains declarations without side
-effects; i.e., an example of what to emulate:
+Aşağıdaki dosya hiçbir yan etki içermeyen bir tanımlama içeren örnektir.
 
 ```php
 <?php
-// declaration
+// tanımlama
 function foo()
 {
-    // function body
+    //  fonksiyon gövdesi
 }
 
-// conditional declaration is *not* a side effect
+// Şartlı tanımlama bir yan etki(Side effect) *değildi*.
 if (! function_exists('bar')) {
     function bar()
     {
-        // function body
+        // fonksiyon gövdesi
     }
 }
 ```
@@ -126,7 +121,7 @@ PHP 5.3 ve sonrası için yazılmış kodlar normal namespace kullanmalıdır.
 
 ```php
 <?php
-// PHP 5.3 and later:
+// PHP 5.3 ve sonrası:
 namespace Vendor\Model;
 
 class Foo
@@ -134,14 +129,14 @@ class Foo
 }
 ```
 
-5.2.x ve öncesi için yazılmış kodlarda pseudo-namespacing çevirisini kullanmalıdır.
-Bu yöntemde sınıflar `Vendor_` öneki alırlar.
+5.2.x ve öncesi için yazılmış kodlarda pseudo-namespacing çevirisi yöntemini 
+kullanmaları önerilir. Bu yöntemde sınıflar `Vendor_` öneki alırlar.
 
 Örneğin:
 
 ```php
 <?php
-// PHP 5.2.x and earlier:
+// PHP 5.2.x ve öncesi:
 class Vendor_Model_Foo
 {
 }
@@ -172,13 +167,12 @@ class Foo
 
 ### 4.2. Özellikler
 
-Bu rehber kasten önerilen özellik isimlerinin `$StudlyCaps`, `$camelCase`, veya `$under_score` gibi şekillerde kullanılmasını önler.
+Bu rehber kasten önerilen özellik isimlerinin `$StudlyCaps`, `$camelCase`, 
+veya `$under_score` gibi şekillerde kullanılmasını önler.
 
-
-
-Whatever naming convention is used SHOULD be applied consistently within a
-reasonable scope. That scope may be vendor-level, package-level, class-level,
-or method-level.
+*Adlandırma kuralı ne kullanılırsa kullanılsın, makul kapsamda ve sürekli 
+kullanılabilir olması önerilir. Bu kapsam vendor-seviyesinde, paket-seviyesinde,
+sınıf-seviyesinde veya metod-seviyesinde olabilir.*
 
 ### 4.3. Metodlar
 
