@@ -1,21 +1,26 @@
 Basit Kodlama Standartları
 ==========================
 
-Bu rehber [PSR-1][] basit kodlama standartları hakkındadır.
+Bu rehber [PSR-1][]'in genişletilmiş hali olan, basit kodlama standartları 
+hakkındadır.
 
-The intent of this guide is to reduce cognitive friction when scanning code
-from different authors. It does so by enumerating a shared set of rules and
-expectations about how to format PHP code.
+Bu kılavuzun amacı kod farklı kişiler tarafından taranırken çıkacak olan bazı 
+fikir ayrılıklarını azaltmak içindir. PHP kodunun formatının nasıl olması 
+gerektiğini, bazı kurallar dizisi ve beklentiler ile anlatmayı hedefler.
 
-The style rules herein are derived from commonalities among the various member
-projects. When various authors collaborate across multiple projects, it helps
-to have one set of guidelines to be used among all those projects. Thus, the
-benefit of this guide is not in the rules themselves, but in the sharing of
-those rules.
+Bu stil kuralları çeşitli üye projeler arasında ortak üretilmiştir. Çeşitli 
+yazarları olan birden fazla projede işbirliği olduğunda, tüm bu kurallar dizisi
+projeler arasında iletişimde yardımcı olur. Bu nedenle, bu kuralların yararı 
+kendine değildir, ama paylaşıldığında yararlıdır.
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in [RFC 2119][].
+(Çeviri için)
+"MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", ve "OPTIONAL" kelimeleri 
+[RFC 2119][] adresinde açıklandığı gibi yorumlanmıştır.
+
+Çeviri:
+Bu belgedeki *ZORUNLU*, *ÖNERİ* ve *SEÇİMLİK* imleri RFC 2119'da açıklandığı 
+gibi yorumlanır. [Bu konudaki çeviri notu](http://belgeler.gen.tr/rfc/rfc2119.html)
 
 [RFC 2119]: http://www.ietf.org/rfc/rfc2119.txt
 [PSR-0]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md
@@ -29,8 +34,9 @@ interpreted as described in [RFC 2119][].
 
 - Kod girintiler için 4 boşluk kullanmalıdır. Tab karakterini değil.
 
-- Satır uzunluğu üzerine zorlayıcı bir sınır yoktur. ama zorunlu olmamakla birlikte 
-120 karakter olması gerekir. satırlar 80 karakter veya daha az olabilir.
+- Satır uzunluğu üzerine zorlayıcı bir sınır yoktur. Ama zorunlu olmamakla 
+(soft limit) birlikte 120 karakter olması gerekir. Satırlar 80 karakter veya 
+daha az olabilir.(!)
 
 - `namespace` ve `use` ifadelerinin her birisi yeni bir satırda yapılmalıdır.
 
@@ -57,7 +63,7 @@ ve kapanma parantezinden önce de boşluk olmamalıdır.
 
 ### 1.1. Örnek
 
-BU örnek yukarıdaki bazı kuralları kapsayan bir örnektir: 
+Bu örnek yukarıdaki bazı kuralları kapsayan bir örnektir: 
 
 ```php
 <?php
@@ -82,7 +88,7 @@ class Foo extends Bar implements FooInterface
 
     final public static function bar()
     {
-        // method body
+        // Metod Gövdesi
     }
 }
 ```
@@ -161,7 +167,7 @@ use FooClass;
 use BarClass as Bar;
 use OtherVendor\OtherPackage\BazClass;
 
-// ... additional PHP code ...
+// ... ekstra PHP kodu ...
 ```
 
 
@@ -193,9 +199,9 @@ class ClassName extends ParentClass implements \ArrayAccess, \Countable
 }
 ```
 
-_Lists of `implements` MAY be split across multiple lines, where each
-subsequent line is indented once. When doing so, the first item in the list
-MUST be on the next line, and there MUST be only one interface per line._
+`implements` listesindeki her bir eleman birer satır olacak şekilde, alt alta 
+yazılabilir. Bunu yaptıınızda ilk eleman bir sonraki satırda olmalı ve her bir 
+satıra bir `interface` gelmeli. 
 
 ```php
 <?php
@@ -223,7 +229,7 @@ Visibility(Görünürlük) her bir özellik için tanımlanmalıdır.
 Her bir statement'da bir özellikden fazla özellik tanımlanmamalıdır. 
 
 Özellik isimleri protected veya private görünürlüklerini göstermek için bir alt 
-çizgi ile başlamamalıdır.
+çizgi ile başlamaması önerilir.
 
 Bir özellik tanımı aşağıdaki gibi görünür.
 
@@ -242,15 +248,16 @@ class ClassName
 Her method için görünürlük tanımlanmalıdır.
 
 Method isimlerinin görünürlüklerini göstermek için method isimlerine önek 
-olarak altçizgi kullanılmamalıdır.
+olarak altçizgi kullanılmaması önerilir.
 
-_Method names MUST NOT be declared with a space after the method name._ 
-Açılış parantezi kendi satırında olmalı ve kapanma parantezi gövdeyinin bitişinden 
-sonraki satırda olmalıdır. Açılış parantezinden sonra boşluk karakteri olmamalıdır
-ve kapanma parantezinden önce boşluk karakteri olmamalıdır.
+Metod isimleri kendilerinden sonra boşluk karakteri olacak şekilde 
+tanımlanmamalıdır. Açılış parantezi kendi satırında olmalı ve kapanma parantezi 
+gövdeyinin bitişinden sonraki satırda olmalıdır. Açılış parantezinden sonra 
+boşluk karakteri olmamalıdır ve kapanma parantezinden önce boşluk karakteri 
+olmamalıdır.
 
-Bi metod tanımlaması aşağıdaki gibidir. Parantezlerin, virgüllerin, boşlukların ve
-metod parantezlerinin yerlerini not ediniz:
+Bir metod tanımlaması aşağıdaki gibidir. Parantezlerin, virgüllerin, boşlukların 
+ve metod parantezlerinin yerlerini not ediniz:
 
 ```php
 <?php
@@ -491,22 +498,23 @@ try {
 6. "Closures"lar
 -----------
 
-"Closure"lar `function` özel anahtarından bir boşluk sonra belirtilmelidir, ve `use` 
-özel anahtarından önce ve sonra bir boşluk bulunmalıdır. 
+"Closure"lar `function` özel anahtarından bir boşluk sonra belirtilmelidir, ve 
+`use` özel anahtarından önce ve sonra bir boşluk bulunmalıdır. 
 
-"Closure" gövdesi açılış parantezi aynı satırda olmalıdır, ve kapatma parantezi gövdenin
-bitiminden sonraki yeni satırda olmalıdır.
+"Closure" gövdesi açılış parantezi aynı satırda olmalıdır, ve kapatma parantezi 
+gövdenin bitiminden sonraki yeni satırda olmalıdır.
 
-Parametre ve değişken listesi açılış parantezinden sonra bir boşluk olmamalıdır ve aynı 
-listenin kapanış parantezinden önce bir boşluk olmamalıdır.
+Parametre ve değişken listesi açılış parantezinden sonra bir boşluk olmamalıdır 
+ve aynı listenin kapanış parantezinden önce bir boşluk olmamalıdır.
 
-Parametre ve değişken listesinde, her virgülden önce boşluk olmamalıdır ve her virgülden 
-sonra bir boşluk karakteri olmalıdır.
+Parametre ve değişken listesinde, her virgülden önce boşluk olmamalıdır ve her 
+virgülden sonra bir boşluk karakteri olmalıdır.
 
-Closure'ın varsayılan değeri olan parametreleri parametre listesinin sonunda olmalıdır.
+Closure'ın varsayılan değeri olan parametreleri parametre listesinin sonunda 
+olmalıdır.
 
-Bir closure aşağıdaki gibi tanımlanmalıdır. Parantezlere, virgüllere ve boşluklara 
-dikkat edin.
+Bir closure aşağıdaki gibi tanımlanmalıdır. Parantezlere, virgüllere ve 
+boşluklara dikkat edin.
 
 ```php
 <?php
@@ -518,16 +526,17 @@ $closureWithArgsAndVars = function ($arg1, $arg2) use ($var1, $var2) {
     // body
 };
 ```
-Parametre ve değişken listesi birden fazla satıra bölüne bölünebilir, her bir alt satır 
-bir girinti içerde olur. Bunu yaparken, listedeki ilk eleman bir sonraki satırda olmalıdır,
-ve her satırda bir parametre ya da değişken olmalıdır.
+Parametre ve değişken listesi birden fazla satıra bölüne bölünebilir, her bir 
+alt satır bir girinti içerde olur. Bunu yaparken, listedeki ilk eleman bir 
+sonraki satırda olmalıdır, ve her satırda bir parametre ya da değişken olmalıdır.
 
-Liste sonlandığı zaman, parametrelerin kapanış parantezi ile closure gövedesinin açılış 
-parantezi aynı satırda ve yeni bir satırda olur. Bu iki parantezin aralarında bir boşluk
-karakteri olur.
+Liste sonlandığı zaman, parametrelerin kapanış parantezi ile closure gövedesinin 
+açılış parantezi aynı satırda ve yeni bir satırda olur. Bu iki parantezin 
+aralarında bir boşluk karakteri olur.
 
-Bir parametreli, parametresiz, değişkenli ve değişkensiz "closure"ların örnekleri 
-aşağıdaki gibi tanımlanmalıdır. Parantezlere, virgüllere ve boşluklara dikkat edin.
+Bir parametreli, parametresiz, değişkenli ve değişkensiz "closure"ların 
+örnekleri aşağıdaki gibi tanımlanır. Parantezlere, virgüllere ve boşluklara 
+dikkat edin.
 
 ```php
 <?php
@@ -595,7 +604,7 @@ $foo->bar(
 --------------
 
 Bir çok elamanın stili ve uygulaması bu rehberde kasıtlı olarak ihmal 
-edilmiştir. BUnlar arasında ama ancak bunlarla sınırlı olmayanlardan bazıları:
+edilmiştir. Bunlar arasında ama ancak bunlarla sınırlı olmayanlardan bazıları:
 
 - Global değişkenler ve global sabitlerin tanımlanması
 
@@ -611,8 +620,8 @@ edilmiştir. BUnlar arasında ama ancak bunlarla sınırlı olmayanlardan bazıl
 
 - En iyi uygulamalar
 
-Gelecekteki önerilerde bu diğer elemanların stilleri ve uygulamarı revize edilebilir 
-ve genişletilebilir.
+Gelecekteki önerilerde bu diğer elemanların stilleri ve uygulamarı revize 
+edilebilir ve genişletilebilir.
 
 
 Ek A. Survey
