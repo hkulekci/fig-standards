@@ -1,12 +1,19 @@
-<?php
-namespace Example;
+Example Implementations of PSR-4
+================================
 
+The following are examples illustrate PSR-4 compliant code:
+
+Closure Example
+---------------
+
+```php
+<?php
 /**
- * An example of of a project-specific implementation.
+ * An example of a project-specific implementation.
  * 
  * After registering this autoload function with SPL, the following line
- * would cause the function to attempt to load the `\Foo\Bar\Baz\Qux` class
- * from `/path/to/project/src/Baz/Qux.php`:
+ * would cause the function to attempt to load the \Foo\Bar\Baz\Qux class
+ * from /path/to/project/src/Baz/Qux.php:
  * 
  *      new \Foo\Bar\Baz\Qux;
  *      
@@ -23,7 +30,7 @@ spl_autoload_register(function ($class) {
     
     // does the class use the namespace prefix?
     $len = strlen($prefix);
-    if (strncmp($prefix, $class, $len) === 0) {
+    if (strncmp($prefix, $class, $len) !== 0) {
         // no, move to the next registered autoloader
         return;
     }
@@ -41,13 +48,24 @@ spl_autoload_register(function ($class) {
         require $file;
     }
 });
+```
+
+Class Example
+-------------
+
+The following is an example class implementation to handle multiple
+namespaces:
+
+```php
+<?php
+namespace Example;
 
 /**
  * An example of a general-purpose implementation that includes the optional
  * functionality of allowing multiple base directories for a single namespace
  * prefix.
  * 
- * Given a `foo-bar` package of classes in the file system at the following
+ * Given a foo-bar package of classes in the file system at the following
  * paths ...
  * 
  *     /path/to/packages/foo-bar/
@@ -60,7 +78,7 @@ spl_autoload_register(function ($class) {
  *             Qux/
  *                 QuuxTest.php    # Foo\Bar\Qux\QuuxTest
  * 
- * ... add the path to the class files for the `\Foo\Bar\` namespace prefix
+ * ... add the path to the class files for the \Foo\Bar\ namespace prefix
  * as follows:
  * 
  *      <?php
@@ -99,7 +117,7 @@ class Psr4AutoloaderClass
     /**
      * Register loader with SPL autoloader stack.
      * 
-     * @return null
+     * @return void
      */
     public function register()
     {
@@ -115,7 +133,7 @@ class Psr4AutoloaderClass
      * @param bool $prepend If true, prepend the base directory to the stack
      * instead of appending it; this causes it to be searched first rather
      * than last.
-     * @return null
+     * @return void
      */
     public function addNamespace($prefix, $base_dir, $prepend = false)
     {
@@ -123,8 +141,9 @@ class Psr4AutoloaderClass
         $prefix = trim($prefix, '\\') . '\\';
         
         // normalize the base directory with a trailing separator
-        $base_dir = rtrim($base_dir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-        
+        $base_dir = rtrim($base_dir, '/') . DIRECTORY_SEPARATOR;
+        $base_dir = rtrim($base_dir, DIRECTORY_SEPARATOR) . '/';
+
         // initialize the namespace prefix array
         if (isset($this->prefixes[$prefix]) === false) {
             $this->prefixes[$prefix] = array();
@@ -186,7 +205,7 @@ class Psr4AutoloaderClass
     protected function loadMappedFile($prefix, $relative_class)
     {
         // are there any base directories for this namespace prefix?
-        if (! isset($this->prefixes[$prefix])) {
+        if (isset($this->prefixes[$prefix]) === false) {
             return false;
         }
             
@@ -199,7 +218,10 @@ class Psr4AutoloaderClass
             $file = $base_dir
                   . str_replace('\\', DIRECTORY_SEPARATOR, $relative_class)
                   . '.php';
-    
+            $file = $base_dir
+                  . str_replace('\\', '/', $relative_class)
+                  . '.php';
+
             // if the mapped file exists, require it
             if ($this->requireFile($file)) {
                 // yes, we're done
@@ -226,6 +248,15 @@ class Psr4AutoloaderClass
         return false;
     }
 }
+```
+
+### Unit Tests
+
+The following example is one way of unit testing the above class loader:
+
+```php
+<?php
+namespace Example\Tests;
 
 class MockPsr4AutoloaderClass extends Psr4AutoloaderClass
 {
@@ -257,7 +288,6 @@ class Psr4AutoloaderClassTest extends \PHPUnit_Framework_TestCase
             '/vendor/foo.bardoom/src/ClassName.php',
             '/vendor/foo.bar.baz.dib/src/ClassName.php',
             '/vendor/foo.bar.baz.dib.zim.gir/src/ClassName.php',
-            '/path/to/includes/Qux/Quux.php',
         ));
         
         $this->loader->addNamespace(
@@ -283,11 +313,6 @@ class Psr4AutoloaderClassTest extends \PHPUnit_Framework_TestCase
         $this->loader->addNamespace(
             'Foo\Bar\Baz\Dib\Zim\Gir',
             '/vendor/foo.bar.baz.dib.zim.gir/src'
-        );
-        
-        $this->loader->addNamespace(
-            '\\',
-            '/path/to/global/includes'
         );
     }
 
