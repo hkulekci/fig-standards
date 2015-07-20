@@ -26,7 +26,7 @@ foo=bar&baz=bat
 
 Bir isteğin ilk satırı "request line"dır, ve sırasıyla, HTTP isteğinin method'unu
 isteğin hedefini(genellikle tam URI ya da web sunucu üzerindeki yolu), ve HTTP 
-protokol sürümünü içerir. Bunu bir ya da daha fazla HTTP başlığı içerir. Daha 
+protokol sürümünü içerir. Bunu bir ya da daha fazla HTTP başlığı izler. Daha 
 sonra bir boş satır ve mesajın gövdesi gelir.
 
 HTTP cevap(response) mesajı benzer bir yapıdadır:
@@ -40,7 +40,7 @@ This is the response body
 
 İlk satır "status line"dır, sırasıyla HTTP protokol sürümü ve HTTP durum kodunu 
 (status code), ve bir "reason phrase"(durum kodunun insanların okuyabileceği 
-açıklamasını) içerir. İstek mesajına bezer şekilde, Bunu bir ya da daha fazla 
+açıklamasını) içerir. İstek mesajına bezer şekilde, bunu bir ya da daha fazla 
 HTTP başlıkları izler ve bir boşluk satırı ve mesajın gövdesi. 
 
 The interfaces described in this document are abstractions around HTTP messages
@@ -294,31 +294,29 @@ authority-form, and asterisk-form). When used, the composed URI instance can
 still be of use, particularly in clients, where it may be used to create the
 connection to the server.
 
-### 1.5 Server-side Requests
+### 1.5 Sunucu Tarafı(Server-side) İstekleri
 
-`RequestInterface` provides the general representation of an HTTP request
-message. However, server-side requests need additional treatment, due to the
-nature of the server-side environment. Server-side processing needs to take into
+`RequestInterface` bir HTTP isteği mesajının genel bir temsilini sağlamaktadır. 
+Ama, sunucu tarafı istekleri, sunucu tarafı ortamın doğası gereki, ekstra 
+işlemler gerektirmektedir. Server-side processing needs to take into
 account Common Gateway Interface (CGI), and, more specifically, PHP's
-abstraction and extension of CGI via its Server APIs (SAPI). PHP has provided
-simplification around input marshaling via superglobals such as:
+abstraction and extension of CGI via its Server APIs (SAPI). PHP superglobal 
+değişkenler sayesinde girdilerde (dışarıdan sunucuya gelen verilerde) 
+sadeleştirme sağlamaktadır. 
 
-- `$_COOKIE`, which deserializes and provides simplified access for HTTP
-  cookies.
-- `$_GET`, which deserializes and provides simplified access for query string
-  arguments.
-- `$_POST`, which deserializes and provides simplified access for urlencoded
-  parameters submitted via HTTP POST; generically, it can be considered the
-  results of parsing the message body.
-- `$_FILES`, which provides serialized metadata around file uploads.
-- `$_SERVER`, which provides access to CGI/SAPI environment variables, which
-  commonly include the request method, the request scheme, the request URI, and
-  headers.
+- `$_COOKIE`, Veriyi deserialize ederek, HTTP cookie'lere daha kolay bir erişim 
+ sağlamaktadır.
+- `$_GET`, Query parameterlerini deserialize ederek daha kolay bir erişim sağlar.
+- `$_POST`, HTTP POST ile gönderilen urlencode ile kodlanmış veriyi deserialize 
+ ederek daha kolay erişilebilir hale getirir. Genellikle, gövdenin parse edilmesi
+ olarak kabul edilir. 
+- `$_FILES`, dosya yüklemelerinin kolay erişilebilir olmasını sağlar.
+- `$_SERVER`, CGI/SAPI ortam değişkenlerine erişimi sağlar, genellikle isteğin 
+ metodu, isteğin schema'sı, isteğin URI'si ve başlıklarını içerir.
 
-`ServerRequestInterface` extends `RequestInterface` to provide an abstraction
-around these various superglobals. This practice helps reduce coupling to the
-superglobals by consumers, and encourages and promotes the ability to test
-request consumers.
+`RequestInterface`den türeyen `ServerRequestInterface` birçok süperglobal'e erişim 
+için imkan sağlar. Bu kullanıcının süperglobal'ler ile direk iletişimin azaltır 
+ve kullanıcıyı test edebilmesi için teşvik eder ve destekler.
 
 The server request provides one additional property, "attributes", to allow
 consumers the ability to introspect, decompose, and match the request against
@@ -326,16 +324,15 @@ application-specific rules (such as path matching, scheme matching, host
 matching, etc.). As such, the server request can also provide messaging between
 multiple request consumers.
 
-### 1.6 Uploaded files
+### 1.6 Dosya Yükleme
 
-`ServerRequestInterface` specifies a method for retrieving a tree of upload
-files in a normalized structure, with each leaf an instance of
-`UploadedFileInterface`.
+`ServerRequestInterface` yüklenen dosyaların bir ağacını, her bir parçası `UploadedFileInterface` instance'ı olacak şekilde bir yapı, sunan bir metod 
+içermektedir.
 
-The `$_FILES` superglobal has some well-known problems when dealing with arrays
-of file inputs. As an example, if you have a form that submits an array of files
-— e.g., the input name "files", submitting `files[0]` and `files[1]` — PHP will
-represent this as:
+`$_FILES` süperglobal değişkeni dosya girdileri dizisi ile ilgili bilinen 
+problemlere sahip. Örneğin, bir form'da şunun gibi bir dosyalar dizisi 
+gönderdiğinizde; `files[0]` ve `files[1]` - PHP bunu şu şekilde gösterecektir:
+
 
 ```php
 array(
@@ -353,7 +350,7 @@ array(
 )
 ```
 
-instead of the expected:
+Umulanın aksine:
 
 ```php
 array(
@@ -372,15 +369,14 @@ array(
 )
 ```
 
-The result is that consumers need to know this language implementation detail,
-and write code for gathering the data for a given upload.
+Sonuç olarak kullanıcı dil uygulamasının detaylarını bilme ihtiyacı duymaktadır ve 
+kodu buna uygun olarak yazmalıdır. 
 
-Additionally, scenarios exist where `$_FILES` is not populated when file uploads
-occur:
+Ek olarak, `$_FILES` değişkenini bazı senaryolarda boş kalmaktadır:
 
-- When the HTTP method is not `POST`.
-- When unit testing.
-- When operating under a non-SAPI environment, such as [ReactPHP](http://reactphp.org).
+- HTTP metodu `POST` değilse
+- Birim tesleri sırasında
+- [ReactPHP](http://reactphp.org) gibi SAPI olmayan ortamlarda durumlarda:
 
 In such cases, the data will need to be seeded differently. As examples:
 
