@@ -1,4 +1,5 @@
-# PSR Review Workflow
+PSR Review Workflow
+===================
 
 This document describes the workflow for proposing a PSR and having it published by the PHP-FIG.
 
@@ -87,16 +88,17 @@ the proposal. The Coordinator must announce the vote on the Mailing List in a th
 
 If the vote passes, the proposal officially enters Draft stage. The proposal receives a PSR number
 incremented from the highest numbered PSR which has passed the Entrance Vote, regardless of the status of 
-that PSR. A list of PSRs will be maintained in the [Index of PHP Standard Recommendations][wikiindex] wiki 
-page of the [official PHP-FIG "fig-standards" repo][repo], where the PSR entry is to be maintained by the 
-Coordinator.
+that PSR. A list of PSRs will be maintained in `index.md` file of the `fig-standards` repo. This
+will be included on the PHP-FIG website, on a page called 
+[Index of PHP Standard Recommendations][psrindex], where the PSR entry is to be maintained by
+the Coordinator.
 
 The working group may continue to work on the proposal during the complete voting period.
 
 ### 2.2 Draft
 
 The goal of the Draft stage is to discuss and polish a PSR proposal up to the point that it can be
-considered for review by the PHP-FIG voting and non-voting members.
+considered for review by the PHP-FIG voting members.
 
 In Draft stage, the Editor(s) and any Contributors may make any changes they see fit via pull requests,
 comments on GitHub, Mailing List threads, IRC and similar tools. Change here is not limited by any strict
@@ -227,11 +229,19 @@ order. The document should distinguish between the following groups:
 * Sponsors (indicating which of them was Coordinator)
 * Contributors (as defined in Section 1)
 
-If someone considers themselves to be a contributor but is not listed here, they should contact the Editors(s) and Sponsors,
-including some proof about their contribution. If the proof is valid, the contributor must be put on this list by
-one of the Editors(s) or Sponsors.
+If someone considers themselves to be a contributor but is not listed here, they should contact the 
+Editors(s) and Sponsors, including some proof about their contribution. If the proof is valid, the 
+contributor must be put on this list by one of the Editors(s) or Sponsors.
 
-### 3.6 Template
+### 3.6 Errata
+
+Errata can be used to add clarification on contentious points that arise after a documents formation. 
+This is limited to non-binding, backwards compatible explanations and must not include new rules.
+
+Errata may only be added to the meta document. To add new Errata to the meta document a vote must be held 
+on the mailing list, and this vote must adhere to [the voting protocol][voting].
+
+### 3.7 Template
 
 This is an example template that can be used to build a meta document.
 
@@ -349,6 +359,13 @@ This is an example template that can be used to build a meta document.
     * [IRC Conversation Gist where everyone decided to rewrite things]
     * [Relevant Poll of existing method names in voting projects for new interface]
 
+    8. Errata
+    ---------
+
+    1. _[08/23/2013]_ This is an example of a non-binding errata rule that was originally missed 
+    in the formation of the document. It can include clarification on wording, explanations, etc
+    but it cannot create new rules.
+
 [repo]: https://github.com/php-fig/fig-standards/tree/master
-[wikiindex]: https://github.com/php-fig/fig-standards/wiki/Index-of-PHP-Standard-Recommendations
+[psrindex]: http://php-fig.org/psr/
 [voting]: https://github.com/php-fig/fig-standards/blob/master/bylaws/001-voting-protocol.md

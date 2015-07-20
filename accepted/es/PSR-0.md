@@ -1,9 +1,17 @@
+Estándar de autocarga de clases
+===============================
+
+> **Obsoleto** - A partir del 21/10/2014 el estándar PSR-0 se ha marcado como obsoleto. Ahora se recomienda [PSR-4]
+como alternativa.
+
+[PSR-4]: http://www.php-fig.org/psr/psr-4/
+
 A continuación se describen los requisitos obligatorios que deben cumplirse para la interoperabilidad del autoloader.
 
 Obligatorio
 -----------
 
-* Un espacio de nombres y clase completamente cualificada debe tener la siguiente estructura `\<Nombre del proveedor>\(<Paquete>\)<Nombre de clase>`.
+* Un espacio de nombres y clase completamente cualificada debe tener la siguiente estructura `\<Nombre del proveedor>\(<Paquete>\)*<Nombre de clase>`.
 * Cada espacio de nombres debe tener un espacio de nombres de nivel superior ("Nombre del proveedor").
 * Cada espacio de nombres puede tener tantos sub-espacios de nombres como sea necesario.
 * Cada separador de espacio de nombres se convierte en la constante `DIRECTORY_SEPARATOR` cuando se carga desde el sistema de archivos. [^1]
